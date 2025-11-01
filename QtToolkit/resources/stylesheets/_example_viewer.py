@@ -24,6 +24,7 @@ from QtToolkit.groupbox import GroupBox
 _styles = QtToolkit.gui.STYLE_PATH.glob('*')
 _sheets = [i.stem for i in _styles]
 _sheets.remove('__init__')
+_sheets.remove('_example_viewer')
 
 
 class ExampleWidget(QtWidgets.QWidget):
