@@ -1,0 +1,90 @@
+"""
+# Grid Layout
+
+* Descriptions
+
+    Small wrapper for a Qt grid layout to eliminate writing the layout
+    setting, providing helpers for last row/column interactions, and saving a
+    few lines.
+"""
+
+from PySide6 import QtWidgets
+
+import QtToolkit
+
+
+class GridLayout(QtWidgets.QGridLayout):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def get_last_occupied_row(self) -> int:
+        """Gets the integer row number of the last occupied row in the given
+         grid layout.
+
+        Returns:
+            int: The last occupied row number. If there are no occupied rows,
+             -1 is returned instead.
+        """
+        last_row = -1
+        for row in range(self.rowCount()):
+            for col in range(self.columnCount()):
+                if self.itemAtPosition(row, col):
+                    last_row = max(last_row, row)
+
+        return last_row
+
+    def get_last_occupied_column(self, row: int) -> int:
+        """Gets the integer column number of the last occupied column in the
+        given row number in the given grid layout.
+
+        Args:
+            row(int): Which row to get the last occupied column from.
+        Returns:
+            int: The last occupied column of the given row from the given
+             layout. If there are no occupied rows, -1 is returned instead.
+        """
+        last_column = -1
+        for col in range(self.columnCount()):
+            if self.itemAtPosition(row, col):
+                last_column = col
+
+        return last_column
+
+    def add_new_row(self, item: QtToolkit.QT_COMMON_TYPE) -> None:
+        """Adds the given item to a new row in the given layout.
+
+        Args:
+            item(Union[QtWidgets.QWidget, QtWidgets.QLayout]): The widget or
+             layout to add.
+        """
+        last_row = self.get_last_occupied_row()
+        next_row = 0 if last_row == -1 else last_row + 1
+
+        t = QtToolkit.get_item_common_type(item)
+        if t == QtToolkit.QT_WIDGET_TYPE:
+            self.addWidget(item, next_row, 0)
+        elif t == QtToolkit.QT_LAYOUT_TYPE:
+            self.addLayout(item, next_row, 0)
+        else:
+            print('[ERROR] - :add_new_row_grid_layout: item is not layout or widget!')
+
+    def add_to_last_row(self, item: QtToolkit.QT_COMMON_TYPE) -> None:
+        """Adds the given item to a new column of the last occupied row of the
+         given layout.
+
+        Args:
+            item(Union[QtWidgets.QWidget, QtWidgets.QLayout]): The widget or
+             layout to add.
+        """
+        last_row = self.get_last_occupied_row()
+        last_row = 0 if last_row == -1 else last_row
+        last_column = self.get_last_occupied_column(last_row)
+        next_column = 0 if last_column == -1 else last_column + 1
+
+        t = QtToolkit.get_item_common_type(item)
+        if t == QtToolkit.QT_WIDGET_TYPE:
+            self.addWidget(item, last_row, next_column)
+        elif t == QtToolkit.QT_LAYOUT_TYPE:
+            self.addLayout(item, last_row, next_column)
+        else:
+            print('[ERROR] - "add_last_row_grid_layout" item is not layout or widget!')
