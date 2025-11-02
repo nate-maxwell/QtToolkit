@@ -14,7 +14,8 @@ import QtToolkit.layout
 
 
 class GroupBox(QtWidgets.QGroupBox):
-    def __init__(self, label: str = '', collapsable: bool = False, horizontal: bool = False) -> None:
+    def __init__(self, label: str = '', collapsable: bool = False,
+                 horizontal: bool = False) -> None:
         super().__init__(label)
         if horizontal:
             self.layout = QtWidgets.QHBoxLayout()
