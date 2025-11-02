@@ -1,11 +1,6 @@
 """
 # Preview Image
 
-* Disclaimer
-
-    This is pretty old and originally written in PySide2, I don't think this is
-    the best way to write this class today.
-
 * Descriptions
 
     A UI component class that holds an updatable preview image and a label.
