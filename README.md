@@ -1,5 +1,5 @@
 # PSToolkit
-A library of PySide helpers + stylesheets.
+A library of PySide helpers + stylesheets specifically for Windows development.
 
 Currently, PySide 6 compatible.
 
