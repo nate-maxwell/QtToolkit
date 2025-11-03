@@ -88,7 +88,7 @@ class ExampleWidget(QtWidgets.QWidget):
 
     def _on_item_selected(self) -> None:
         p = Path(PSToolkit.gui.STYLE_PATH, f'{self.sl_items.selected_item}')
-        if self.sl_items.selected_items is None or not p.eixists():
+        if self.sl_items.selected_items is None or not p.exists():
             return
 
         with open(p) as f:
