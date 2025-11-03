@@ -21,7 +21,7 @@ def signal(*types: type) -> QtCore.SignalInstance:
     return typing.cast(QtCore.SignalInstance, typing.cast(object, QtCore.Signal(*types)))
 
 
-def emit_signal(signal_name: str):
+def emit_signal(signal_name: str) -> Callable:
     """Class method decorator for emitting a Qt signal after method execution.
 
     Examples:
