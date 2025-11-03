@@ -30,23 +30,6 @@ BUTTON_YELLOW_40X40 = Path(ICONS_PATH, 'ICON_Default_Yellow_40x40.png')
 BUTTON_BLACK_40X40 = Path(ICONS_PATH, 'ICON_Default_Black_40x40.png')
 BUTTON_FLAT_BLACK_200X40 = Path(ICONS_PATH, 'ICON_FlatBlack_200x40.png')
 
-# ----------Misc Icons---------------------------------------------------------
-CHECK_ICON = Path(ICONS_PATH, 'check.png')
-EYE_ICON = Path(ICONS_PATH, 'eye.png')
-ICON_SMILE = Path(ICONS_PATH, 'ICON_smile_100x100.svg')
-
-# ----------Menu/Action Icons--------------------------------------------------
-ICON_ACTIVITY_100x100 = Path(ICONS_PATH, 'ICON_activity_100x100.svg')
-ICON_BELL_100x100 = Path(ICONS_PATH, 'ICON_bell_100x100.svg')
-ICON_LOG_OUT_100x100 = Path(ICONS_PATH, 'ICON_log-out_100x100.svg')
-ICON_HAMBURGER_MENU_100x100 = Path(ICONS_PATH, 'ICON_menu_100x100.svg')
-ICON_PROGRAM_100x100 = Path(ICONS_PATH, 'ICON_program_100x100.svg')
-ICON_SETTINGS_100x100 = Path(ICONS_PATH, 'ICON_settings_100x100.svg')
-ICON_USER_100x100 = Path(ICONS_PATH, 'ICON_user_100x100.svg')
-ICON_CHEVRON_DOWN_100x100 = Path(ICONS_PATH, 'ICON_chevron-down_100x100.svg')
-ICON_CHEVRON_LEFT_100x100 = Path(ICONS_PATH, 'ICON_chevron-left_100x100.svg')
-ICON_CHEVRON_RIGHT_100x100 = Path(ICONS_PATH, 'ICON_chevron-right_100x100.svg')
-
 # ----------Program LOGOS / ICONS----------------------------------------------
 ICON_AFTER_EFFECTS_400x400 = Path(ICONS_PATH, 'ICON_after_effects_400x400.png')
 ICON_BLENDER_400x400 = Path(ICONS_PATH, 'ICON_blender_400x400.png')

@@ -7,7 +7,6 @@
 """
 
 
-import sys
 from pathlib import Path
 
 from PySide6 import QtCore
@@ -15,6 +14,7 @@ from PySide6 import QtWidgets
 
 import PSToolkit.gui
 import PSToolkit.shapes
+from PSToolkit import app
 from PSToolkit.main_window import MainWindow
 from PSToolkit.searchable_list import SearchableList
 from PSToolkit.groupbox import GroupBox
@@ -22,8 +22,8 @@ from PSToolkit.groupbox import GroupBox
 
 _styles = PSToolkit.gui.STYLE_PATH.glob('*')
 _sheets = [i.name for i in _styles]
-_sheets.remove('__init__.py')
-_sheets.remove('_example_viewer.py')
+if '_example_viewer.py' in _sheets:
+    _sheets.remove('_example_viewer.py')
 
 
 class ExampleWidget(QtWidgets.QWidget):
@@ -105,13 +105,5 @@ class StyleViewer(MainWindow):
         self.setCentralWidget(ExampleWidget())
 
 
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    window = StyleViewer()
-    window.show()
-
-    app.exec()
-
-
 if __name__ == '__main__':
-    main()
+    app.exec_app(StyleViewer)
