@@ -27,7 +27,6 @@ class LabeledLineEdit(QtWidgets.QWidget):
         self.layout_main.addWidget(self.label)
         self.layout_main.addWidget(self.line_edit)
 
-    @property
     def text(self) -> str:
         """Returns the current line edit text."""
         return self.line_edit.text()

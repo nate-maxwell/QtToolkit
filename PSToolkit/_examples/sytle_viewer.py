@@ -85,7 +85,7 @@ class ExampleWidget(QtWidgets.QWidget):
         self.layout_main.addWidget(self.grp_example)
 
     def _on_item_selected(self) -> None:
-        p = Path(PSToolkit.styles.STYLE_PATH, f'{self.sl_items.selected_item}')
+        p = Path(PSToolkit.styles.STYLE_PATH, f'{self.sl_items.selected_item()}')
         if self.sl_items.selected_items is None or not p.exists():
             return
 

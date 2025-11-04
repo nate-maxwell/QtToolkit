@@ -98,14 +98,12 @@ class SearchableList(QtWidgets.QWidget):
 
         self.list_column.addItems(filtered_list)
 
-    @property
     def selected_item(self) -> Optional[str]:
         if self.list_column.currentItem():
             return self.list_column.currentItem().text()
         else:
             return None
 
-    @property
     def selected_items(self) -> Optional[list[str]]:
         temp = []
         if self.list_column.currentItem():

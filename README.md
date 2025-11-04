@@ -18,6 +18,10 @@ add widgets or layouts, it will be `widget.add_widget(wid)`,
 for `widget.layout.addWidget(wid)`, etc. If those methods are not present, the
 wrappers do not exist for that class.
 
+Properties are not used to keep the workflow / coding style similar to actual
+PySide. Use `object.value()` or  `object.get_value()` and 
+`object.set_value(val)`.
+
 ### Resources
 
 `QtToolkit.gui` contains path variables to the stored icons and stylesheets.

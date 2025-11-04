@@ -5,6 +5,8 @@ import PSToolkit.main_window
 from PSToolkit.labeled_combobox import LabeledComboBox
 from PSToolkit.labeled_line_edit import LabeledLineEdit
 from PSToolkit.labeled_spinbox import LabeledSpinBox
+from PSToolkit.grid_layout import GridLayout
+from PSToolkit.groupbox import GroupBox
 
 
 class ExampleWindow(PSToolkit.main_window.MainWindow):
@@ -14,10 +16,16 @@ class ExampleWindow(PSToolkit.main_window.MainWindow):
         self.setCentralWidget(self.widget_main)
         self.layout_main = QtWidgets.QVBoxLayout()
         self.widget_main.setLayout(self.layout_main)
-        self.setFixedWidth(300)
+        self.setFixedWidth(400)
 
-        items = ['alpha', 'bravo', 'charlie', 'echo']
-        self.combo = LabeledComboBox('Combobox', items, True)
+        # -----Labeled---------------------------------------------------------
+        self.group_labeled = GroupBox('Labeled')
+
+        items_dyn = ['alpha', 'bravo', 'charlie', 'echo']
+        self.combo_dynamic = LabeledComboBox('Dynamic Combobox', items_dyn, True)
+
+        item_stc = ['1', '2', '3', '4', '5']
+        self.combo_static = LabeledComboBox('Static Combobox', item_stc)
 
         self.line_edit = LabeledLineEdit('Line Edit')
         self.line_edit.set_placeholder_text("Don't read this.")
@@ -27,10 +35,46 @@ class ExampleWindow(PSToolkit.main_window.MainWindow):
         self.spinbox_float = LabeledSpinBox('Spinbox Float', True)
         self.spinbox_float.set_value(21.4)
 
-        self.layout_main.addWidget(self.combo)
-        self.layout_main.addWidget(self.line_edit)
-        self.layout_main.addWidget(self.spinbox_int)
-        self.layout_main.addWidget(self.spinbox_float)
+        # -----Unlabeled-------------------------------------------------------
+        self.group_unlabeled = GroupBox('Unlabeled, using GridLayout')
+
+        items_dyn = ['alpha', 'bravo', 'charlie', 'echo']
+        self.un_combo_dynamic = LabeledComboBox('', items_dyn, True)
+
+        item_stc = ['1', '2', '3', '4', '5']
+        self.un_combo_static = LabeledComboBox('', item_stc)
+
+        self.un_line_edit = LabeledLineEdit('')
+        self.un_line_edit.set_placeholder_text("Don't read this.")
+
+        self.un_spinbox_int = LabeledSpinBox('')
+        self.un_spinbox_int.set_value(41)
+        self.un_spinbox_float = LabeledSpinBox('', True)
+        self.un_spinbox_float.set_value(21.4)
+
+        self.grid_layout = GridLayout()
+        self.grid_layout.add_to_last_row(QtWidgets.QLabel('Dynamic Combobox'))
+        self.grid_layout.add_to_last_row(self.un_combo_dynamic)
+        self.grid_layout.add_to_new_row(QtWidgets.QLabel('Static Combobox'))
+        self.grid_layout.add_to_last_row(self.un_combo_static)
+        self.grid_layout.add_to_new_row(QtWidgets.QLabel('Line Edit'))
+        self.grid_layout.add_to_last_row(self.un_line_edit)
+        self.grid_layout.add_to_new_row(QtWidgets.QLabel('Spinbox Int'))
+        self.grid_layout.add_to_last_row(self.un_spinbox_int)
+        self.grid_layout.add_to_new_row(QtWidgets.QLabel('Spinbox Float'))
+        self.grid_layout.add_to_last_row(self.un_spinbox_float)
+
+        # -----Layout----------------------------------------------------------
+
+        self.group_labeled.add_widget(self.combo_dynamic)
+        self.group_labeled.add_widget(self.combo_static)
+        self.group_labeled.add_widget(self.line_edit)
+        self.group_labeled.add_widget(self.spinbox_int)
+        self.group_labeled.add_widget(self.spinbox_float)
+        self.layout_main.addWidget(self.group_labeled)
+
+        self.group_unlabeled.add_layout(self.grid_layout)
+        self.layout_main.addWidget(self.group_unlabeled)
 
 
 if __name__ == '__main__':

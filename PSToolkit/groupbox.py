@@ -43,7 +43,7 @@ class GroupBox(QtWidgets.QGroupBox):
 
     def on_toggle(self, expanded: bool) -> None:
         """Recursively sets the visibility of items in the layout."""
-        PSToolkit.layout.set_layout_visible(self.layout, expanded)
+        PSToolkit.layout.set_layout_visibility(self.layout, expanded)
         self.setMaximumHeight(self.sizeHint().height() if expanded else self.fontMetrics().height() * 2)
         self.layout.invalidate()
         self.updateGeometry()

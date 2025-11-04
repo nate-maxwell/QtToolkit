@@ -10,12 +10,12 @@
 import PySide6.QtWidgets as QtWidgets
 
 
-def set_layout_visible(layout: QtWidgets.QLayout, visible: bool) -> None:
-    """Hide or show all widgets inside a layout.
+def set_layout_visibility(layout: QtWidgets.QLayout, visible: bool) -> None:
+    """Hide or show all children inside a layout.
 
     Args:
-        layout: The layout whose contents to toggle.
-        visible: True to show, False to hide.
+        layout (QtWidgets.QLayout): The layout whose contents to toggle.
+        visible (bool): True to show, False to hide.
     """
     if layout is None:
         return
@@ -31,7 +31,7 @@ def set_layout_visible(layout: QtWidgets.QLayout, visible: bool) -> None:
         else:
             child_layout = item.layout()
             if child_layout is not None:
-                set_layout_visible(child_layout, visible)
+                set_layout_visibility(child_layout, visible)
 
 
 def clear_layout(layout: QtWidgets.QLayout) -> None:
