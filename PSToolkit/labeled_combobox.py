@@ -10,14 +10,16 @@
 
 from typing import Optional
 
+from PySide6 import QtCore
 from PySide6 import QtWidgets
 
 import PSToolkit.regx
+import PSToolkit.dialogs
 
 
 class LabeledComboBox(QtWidgets.QWidget):
     def __init__(self, text: str, contents: Optional[list[str]] = None,
-                 vertical: bool = False) -> None:
+                 appendable: bool = False, vertical: bool = False) -> None:
         super().__init__()
         if vertical:
             self.layout_main = QtWidgets.QVBoxLayout()
@@ -29,9 +31,17 @@ class LabeledComboBox(QtWidgets.QWidget):
         self.label = QtWidgets.QLabel(text)
         self.layout_main.addWidget(self.label)
         self.cmb_box = QtWidgets.QComboBox()
+        self.cmb_box.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
+                                   QtWidgets.QSizePolicy.Policy.Fixed)
+
         if contents:
             self.cmb_box.addItems(contents)
         self.layout_main.addWidget(self.cmb_box)
+
+        if appendable:
+            self.btn_add = QtWidgets.QPushButton('+')
+            self.layout_main.addWidget(self.btn_add)
+            self.btn_add.clicked.connect(self.append_item)
 
     def current_text(self) -> str:
         """Shortened namespace way to get current selected item."""
@@ -53,6 +63,12 @@ class LabeledComboBox(QtWidgets.QWidget):
         if items is None:
             return
         self.cmb_box.addItems(items)
+
+    def append_item(self) -> None:
+        dlg = PSToolkit.dialogs.SingleLineTextDialog('New Item', 'Name:')
+        if dlg.exec():
+            self.add_items([dlg.text()])
+            self.cmb_box.model().sort(0, QtCore.Qt.SortOrder.AscendingOrder)
 
     def set_current_index(self, index: int):
         """Sets the combobox active index much like

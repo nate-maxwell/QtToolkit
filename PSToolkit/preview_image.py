@@ -14,8 +14,8 @@ import PySide6.QtCore as QtCore
 import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
 
-import PSToolkit.gui
-from image_sequence import ImageSequence
+import PSToolkit.icons
+from PSToolkit.image_sequence import ImageSequence
 
 
 class PreviewImage(QtWidgets.QWidget):
@@ -39,7 +39,7 @@ class PreviewImage(QtWidgets.QWidget):
 
         self._size = (200, 200) if size is None else size
         self._sequence: Union[ImageSequence, None] = None
-        self._default_image_path: Path = Path(PSToolkit.gui.ICON_NO_PREVIEW_384x384)
+        self._default_image_path: Path = Path(PSToolkit.icons.ICON_NO_PREVIEW_384x384)
 
         self._layout = QtWidgets.QVBoxLayout(self)
         self._layout.setContentsMargins(0, 0, 0, 0)

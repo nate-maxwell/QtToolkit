@@ -15,7 +15,7 @@ from PySide6 import QtCore
 from PySide6 import QtGui
 from PySide6 import QtWidgets
 
-import PSToolkit.gui
+import PSToolkit.icons
 
 
 def null(*args) -> None:
@@ -25,7 +25,7 @@ def null(*args) -> None:
     pass
 
 
-DEFAULT_ICON = PSToolkit.gui.BUTTON_BLACK_40X40
+DEFAULT_ICON = PSToolkit.icons.BUTTON_BLACK_40X40
 
 
 class Toolbar(QtWidgets.QToolBar):

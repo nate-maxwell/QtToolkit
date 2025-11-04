@@ -24,6 +24,10 @@ def signal(*types: type) -> QtCore.SignalInstance:
 def emit_signal(signal_name: str) -> Callable:
     """Class method decorator for emitting a Qt signal after method execution.
 
+    Notes:
+        Does not pass return value to connected functions. Only invokes them on
+        method completion.
+
     Examples:
         >>> import PSToolkit.signal
         >>>

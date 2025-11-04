@@ -12,7 +12,7 @@ from pathlib import Path
 from PySide6 import QtCore
 from PySide6 import QtWidgets
 
-import PSToolkit.gui
+import PSToolkit.styles
 import PSToolkit.shapes
 from PSToolkit import app
 from PSToolkit.main_window import MainWindow
@@ -20,10 +20,8 @@ from PSToolkit.searchable_list import SearchableList
 from PSToolkit.groupbox import GroupBox
 
 
-_styles = PSToolkit.gui.STYLE_PATH.glob('*')
+_styles = PSToolkit.styles.STYLE_PATH.glob('*')
 _sheets = [i.name for i in _styles]
-if '_example_viewer.py' in _sheets:
-    _sheets.remove('_example_viewer.py')
 
 
 class ExampleWidget(QtWidgets.QWidget):
@@ -87,7 +85,7 @@ class ExampleWidget(QtWidgets.QWidget):
         self.layout_main.addWidget(self.grp_example)
 
     def _on_item_selected(self) -> None:
-        p = Path(PSToolkit.gui.STYLE_PATH, f'{self.sl_items.selected_item}')
+        p = Path(PSToolkit.styles.STYLE_PATH, f'{self.sl_items.selected_item}')
         if self.sl_items.selected_items is None or not p.exists():
             return
 
@@ -100,6 +98,7 @@ class StyleViewer(MainWindow):
         super().__init__('Style Library Viewer',
                          (0, 0), (0, 0))
         self.setCentralWidget(ExampleWidget())
+        self.setFixedWidth(600)
 
 
 if __name__ == '__main__':
