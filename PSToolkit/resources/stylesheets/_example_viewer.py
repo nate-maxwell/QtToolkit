@@ -103,4 +103,4 @@ class StyleViewer(MainWindow):
 
 
 if __name__ == '__main__':
-    app.exec_app(StyleViewer)
+    app.exec_app(StyleViewer, 'StyleViewer')

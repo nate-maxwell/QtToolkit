@@ -29,7 +29,6 @@ def set_layout_visible(layout: QtWidgets.QLayout, visible: bool) -> None:
         if widget is not None:
             widget.setVisible(visible)
         else:
-            # Recursively hide child layouts
             child_layout = item.layout()
             if child_layout is not None:
                 set_layout_visible(child_layout, visible)

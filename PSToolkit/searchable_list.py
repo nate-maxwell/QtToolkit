@@ -35,6 +35,8 @@ class SearchableList(QtWidgets.QWidget):
         in the list widget.
 
     `Methods`:
+        item_selected: A pre-connected function for when an item is selected
+            that currently does nothing until overridden.
         populate_column(contents: list):
         Populates the column from a list of items.
 

@@ -66,7 +66,7 @@ def single_instance_lock(name: str) -> QtCore.QLockFile:
     return lock
 
 
-def init_application(org: str = 'MyOrg', app_name: str = 'MyApp',
+def init_application(org: str, app_name: str,
                      enable_highdpi: bool = True,
                      app_id_windows: Optional[str] = None,
                      ) -> QtWidgets.QApplication:
@@ -105,11 +105,13 @@ def exec_single_instance_app(
     """Create, guard, and run a single-instance GUI with restore/save and style.
 
     Args:
-        window_factory (Callable): Callable that returns a constructed QMainWindow.
+        window_factory (Callable): Callable that returns a constructed
+            QMainWindow.
         org (str): Organization name.
         app_name (str): Application name.
         app_id_windows (Optional[str]): Optional Windows AppUserModelID string.
-        lock_name (Optional[str]): Name for single-instance lock (defaults to app_name).
+        lock_name (Optional[str]): Name for single-instance lock (defaults to
+            app_name).
 
     Returns:
         The process exit code.
@@ -135,9 +137,9 @@ def exec_single_instance_app(
     return code
 
 
-def exec_app(window_cls: Type[QtWidgets.QMainWindow]) -> None:
+def exec_app(window_cls: Type[QtWidgets.QMainWindow], app_name: str) -> None:
     """Run a QApplication for a given main window (basic)."""
-    app = QtWidgets.QApplication(sys.argv)
+    app = init_application('MyOrg', app_name)
     win = window_cls()
     win.show()
     app.exec()

@@ -110,8 +110,7 @@ def _as_bytearray(value: Any) -> QtCore.QByteArray:
     return QtCore.QByteArray()
 
 
-def save_window(window: QtWidgets.QMainWindow,
-                settings: QtCore.QSettings) -> None:
+def save_window(window: QtWidgets.QMainWindow, settings: QtCore.QSettings) -> None:
     """Save window geometry and state to QSettings.
 
     Args:
