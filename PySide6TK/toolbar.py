@@ -26,6 +26,8 @@ def null(*args) -> None:
 
 
 DEFAULT_ICON = PySide6TK.icons.BUTTON_BLACK_40X40
+_SEP = '---------------'
+"""Submenu separator via text insert."""
 
 
 class Toolbar(QtWidgets.QToolBar):
@@ -175,9 +177,9 @@ class Toolbar(QtWidgets.QToolBar):
         item = submenu.addAction(cmd_name)
         item.triggered.connect(cmd)
 
-    def add_submenu_separator(self, submenu: QtWidgets.QMenu, label: str = '---------------') -> None:
+    def add_submenu_separator(self, submenu: QtWidgets.QMenu, label: str = _SEP) -> None:
         """Adds a dummy item to the given submenu, with the given label.
-        Label defaults to ---------------.
+        Label defaults to '---------------'.
         """
         self.add_submenu_command(submenu, label, null)
 
