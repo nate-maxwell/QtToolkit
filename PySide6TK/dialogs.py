@@ -18,14 +18,15 @@ class SingleLineTextDialog(QtWidgets.QDialog):
     """Dialog that gathers single-line text with optional regex validation.
 
     Args:
-        title: Window title.
-        label: Prompt displayed above the input.
-        initial_text: Pre-filled text for the line edit.
-        placeholder: Placeholder text for the line edit.
-        regex_validator: Optional Qt regular expression for validation. If provided,
-            OK is only enabled when the input is 'Acceptable'.
-        allow_empty: If False, OK is disabled until non-empty text is entered.
-        parent: Optional parent widget.
+        title (str): Window title.
+        label (str): Prompt displayed above the input.
+        initial_text (str): Pre-filled text for the line edit.
+        placeholder (str): Placeholder text for the line edit.
+        regex_validator (Optional[QtCore.QRegularExpression]): Optional Qt
+            regular expression for validation. If provided, OK is only enabled
+            when the input is 'Acceptable'.
+        allow_empty (bool): If False, OK is disabled until non-empty text is entered.
+        parent (Optional[QtWidgets.QWidget]): Optional parent widget.
     """
 
     def __init__(
@@ -98,12 +99,12 @@ class MultiLineTextDialog(QtWidgets.QDialog):
     """Dialog that gathers multi-line text.
 
     Args:
-        title: Window title.
-        label: Prompt displayed above the input.
-        initial_text: Pre-filled text for the text edit.
-        placeholder: Placeholder text for the text edit (supported in recent Qt).
-        allow_empty: If False, OK is disabled until non-empty text is entered.
-        parent: Optional parent widget.
+        title (str): Window title.
+        label (str): Prompt displayed above the input.
+        initial_text (str): Pre-filled text for the text edit.
+        placeholder (str): Placeholder text for the text edit (supported in recent Qt).
+        allow_empty (bool): If False, OK is disabled until non-empty text is entered.
+        parent (Optional[QtWidgets.QWidget]): Optional parent widget.
     """
 
     def __init__(
