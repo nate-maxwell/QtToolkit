@@ -178,7 +178,8 @@ class MainWindow(QtWidgets.QMainWindow):
             closing.
     """
 
-    def __init__(self, window_name: str,
+    def __init__(self,
+                 window_name: str,
                  min_size: Optional[tuple[int, int]] = None,
                  max_size: Optional[tuple[int, int]] = None,
                  parent: Optional[QtWidgets.QWidget] = None) -> None:

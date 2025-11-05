@@ -11,6 +11,8 @@
 
 from PySide6 import QtWidgets
 
+from PySide6TK.enums import Orient
+
 
 class LabeledLineEdit(QtWidgets.QWidget):
     """A composite widget combining a label and a line edit.
@@ -35,24 +37,36 @@ class LabeledLineEdit(QtWidgets.QWidget):
 
     Args:
         text (str): The label text displayed beside or above the input field.
-        vertical (bool): If ``True``, the label appears above the line edit
-            (vertical layout); otherwise, the label appears to the left
-            (horizontal layout). Defaults to ``False``.
+        label_pos (PySide6TK.enums.Orient): Whether to put the label on
+            ``Top``, ``Bottom``, ``Left``, or ``Right`` of the combobox.
+            Defaults to ``Left``.
     """
 
-    def __init__(self, text: str, vertical: bool = False) -> None:
+    def __init__(self, text: str, label_pos: Orient = Orient.Left) -> None:
         super().__init__()
-        if vertical:
-            self.layout_main = QtWidgets.QVBoxLayout()
-        else:
-            self.layout_main = QtWidgets.QHBoxLayout()
+        self.label = QtWidgets.QLabel(text)
+        self.line_edit = QtWidgets.QLineEdit()
+
+        match label_pos:
+            case Orient.Top:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addWidget(self.line_edit)
+            case Orient.Bottom:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addWidget(self.line_edit)
+                self.layout_main.addWidget(self.label)
+            case Orient.Left:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addWidget(self.line_edit)
+            case Orient.Right:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addWidget(self.line_edit)
+                self.layout_main.addWidget(self.label)
 
         self.layout_main.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout_main)
-        self.label = QtWidgets.QLabel(text)
-        self.line_edit = QtWidgets.QLineEdit()
-        self.layout_main.addWidget(self.label)
-        self.layout_main.addWidget(self.line_edit)
 
     def text(self) -> str:
         """Returns the current line edit text."""

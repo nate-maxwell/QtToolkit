@@ -12,6 +12,10 @@ class ExampleWindow(QtWrappers.MainWindow):
         self.widget_main.setLayout(self.layout_main)
         self.setFixedWidth(400)
 
+        self._create_widgets()
+        self._create_layout()
+
+    def _create_widgets(self) -> None:
         # -----Labeled---------------------------------------------------------
         self.group_labeled = QtWrappers.GroupBox('Labeled On Widget')
 
@@ -47,6 +51,28 @@ class ExampleWindow(QtWrappers.MainWindow):
         self.un_spinbox_float.set_value(21.4)
 
         self.grid_layout = QtWrappers.GridLayout()
+
+        # -----Directions------------------------------------------------------
+        self.group_positions = QtWrappers.GroupBox('Label Positions')
+        self.spinbox_top = QtWrappers.LabeledSpinBox('Top', label_pos=QtWrappers.Orient.Top)
+        self.spinbox_bot = QtWrappers.LabeledSpinBox('Right', label_pos=QtWrappers.Orient.Right)
+        self.spinbox_lft = QtWrappers.LabeledSpinBox('Bottom', label_pos=QtWrappers.Orient.Bottom)
+        self.spinbox_rgt = QtWrappers.LabeledSpinBox('Left', label_pos=QtWrappers.Orient.Left)
+
+    def _create_layout(self) -> None:
+        # -----Labeled---------------------------------------------------------
+        self.group_labeled.add_widget(self.combo_dynamic)
+        self.group_labeled.add_widget(QtWrappers.HorizontalLine())
+        self.group_labeled.add_widget(self.combo_static)
+        self.group_labeled.add_widget(QtWrappers.HorizontalLine())
+        self.group_labeled.add_widget(self.line_edit)
+        self.group_labeled.add_widget(QtWrappers.HorizontalLine())
+        self.group_labeled.add_widget(self.spinbox_int)
+        self.group_labeled.add_widget(QtWrappers.HorizontalLine())
+        self.group_labeled.add_widget(self.spinbox_float)
+        self.layout_main.addWidget(self.group_labeled)
+
+        # -----Unlabeled-------------------------------------------------------
         self.grid_layout.add_to_last_row(QtWidgets.QLabel('Dynamic Combobox'))
         self.grid_layout.add_to_last_row(self.un_combo_dynamic)
         self.grid_layout.add_to_new_row(QtWidgets.QLabel('Static Combobox'))
@@ -58,17 +84,16 @@ class ExampleWindow(QtWrappers.MainWindow):
         self.grid_layout.add_to_new_row(QtWidgets.QLabel('Spinbox Float'))
         self.grid_layout.add_to_last_row(self.un_spinbox_float)
 
-        # -----Layout----------------------------------------------------------
+        # -----Directions------------------------------------------------------
+        self.group_positions.add_widget(self.spinbox_top)
+        self.group_positions.add_widget(self.spinbox_bot)
+        self.group_positions.add_widget(self.spinbox_lft)
+        self.group_positions.add_widget(self.spinbox_rgt)
 
-        self.group_labeled.add_widget(self.combo_dynamic)
-        self.group_labeled.add_widget(self.combo_static)
-        self.group_labeled.add_widget(self.line_edit)
-        self.group_labeled.add_widget(self.spinbox_int)
-        self.group_labeled.add_widget(self.spinbox_float)
-        self.layout_main.addWidget(self.group_labeled)
-
+        # -----Main------------------------------------------------------------
         self.group_unlabeled.add_layout(self.grid_layout)
         self.layout_main.addWidget(self.group_unlabeled)
+        self.layout_main.addWidget(self.group_positions)
 
 
 if __name__ == '__main__':

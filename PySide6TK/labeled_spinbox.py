@@ -12,6 +12,8 @@ from typing import Union
 
 from PySide6 import QtWidgets
 
+from PySide6TK.enums import Orient
+
 
 class LabeledSpinBox(QtWidgets.QWidget):
     """A composite widget combining a label and a numeric spin box.
@@ -40,21 +42,14 @@ class LabeledSpinBox(QtWidgets.QWidget):
         double (bool): If ``True``, uses a ``QDoubleSpinBox`` for floating-point
             input; otherwise, uses a ``QSpinBox`` for integer input.
             Defaults to ``False``.
-        vertical (bool): If ``True``, the label appears above the spin box
-            (vertical layout); otherwise, the label appears to the left
-            (horizontal layout). Defaults to ``False``.
+        label_pos (PySide6TK.enums.Orient): Whether to put the label on
+            ``Top``, ``Bottom``, ``Left``, or ``Right`` of the combobox.
+            Defaults to ``Left``.
     """
 
     def __init__(self, text: str, double: bool = False,
-                 vertical: bool = False) -> None:
+                 label_pos: Orient = Orient.Left) -> None:
         super().__init__()
-        if vertical:
-            self.layout_main = QtWidgets.QVBoxLayout()
-        else:
-            self.layout_main = QtWidgets.QHBoxLayout()
-
-        self.layout_main.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.layout_main)
 
         if double:
             self.spinbox = QtWidgets.QDoubleSpinBox()
@@ -62,8 +57,27 @@ class LabeledSpinBox(QtWidgets.QWidget):
             self.spinbox = QtWidgets.QSpinBox()
 
         self.label = QtWidgets.QLabel(text)
-        self.layout_main.addWidget(self.label)
-        self.layout_main.addWidget(self.spinbox)
+
+        match label_pos:
+            case Orient.Top:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addWidget(self.spinbox)
+            case Orient.Bottom:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addWidget(self.spinbox)
+                self.layout_main.addWidget(self.label)
+            case Orient.Left:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addWidget(self.spinbox)
+            case Orient.Right:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addWidget(self.spinbox)
+                self.layout_main.addWidget(self.label)
+
+        self.layout_main.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_main)
 
     def set_value(self, v: Union[int, float]) -> None:
         self.spinbox.setValue(v)

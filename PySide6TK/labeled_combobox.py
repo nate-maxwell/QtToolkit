@@ -15,6 +15,7 @@ from PySide6 import QtWidgets
 
 import PySide6TK.regx
 import PySide6TK.dialogs
+from PySide6TK.enums import Orient
 
 
 class LabeledComboBox(QtWidgets.QWidget):
@@ -49,9 +50,9 @@ class LabeledComboBox(QtWidgets.QWidget):
         appendable (bool): If ``True``, adds a “+” button allowing users to
             append new items interactively via a text dialog. Defaults to
             ``False``.
-        vertical (bool): If ``True``, places the label above the combo box
-            (vertical layout); otherwise, beside it (horizontal layout).
-            Defaults to ``False``.
+        label_pos (PySide6TK.enums.Orient): Whether to put the label on
+            ``Top``, ``Bottom``, ``Left``, or ``Right`` of the combobox.
+            Defaults to ``Left``.
 
     Notes:
         - The combo box automatically resizes horizontally to fill available
@@ -60,29 +61,48 @@ class LabeledComboBox(QtWidgets.QWidget):
           after being added.
     """
 
-    def __init__(self, text: str, contents: Optional[list[str]] = None,
-                 appendable: bool = False, vertical: bool = False) -> None:
+    def __init__(self,
+                 text: str,
+                 contents: Optional[list[str]] = None,
+                 appendable: bool = False,
+                 label_pos: Orient = Orient.Left) -> None:
         super().__init__()
-        if vertical:
-            self.layout_main = QtWidgets.QVBoxLayout()
-        else:
-            self.layout_main = QtWidgets.QHBoxLayout()
 
-        self.layout_main.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.layout_main)
         self.label = QtWidgets.QLabel(text)
-        self.layout_main.addWidget(self.label)
         self.cmb_box = QtWidgets.QComboBox()
         self.cmb_box.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
                                    QtWidgets.QSizePolicy.Policy.Fixed)
+        self.hlayout_box = QtWidgets.QHBoxLayout()  # for box + button
+
+        match label_pos:
+            case Orient.Top:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addLayout(self.hlayout_box)
+            case Orient.Bottom:
+                self.layout_main = QtWidgets.QVBoxLayout()
+                self.layout_main.addLayout(self.hlayout_box)
+                self.layout_main.addWidget(self.label)
+            case Orient.Left:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addWidget(self.label)
+                self.layout_main.addLayout(self.hlayout_box)
+            case Orient.Right:
+                self.layout_main = QtWidgets.QHBoxLayout()
+                self.layout_main.addLayout(self.hlayout_box)
+                self.layout_main.addWidget(self.label)
+
+        self.layout_main.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_main)
+
+        self.hlayout_box.addWidget(self.cmb_box)
 
         if contents:
             self.cmb_box.addItems(contents)
-        self.layout_main.addWidget(self.cmb_box)
 
         if appendable:
             self.btn_add = QtWidgets.QPushButton('+')
-            self.layout_main.addWidget(self.btn_add)
+            self.hlayout_box.addWidget(self.btn_add)
             self.btn_add.clicked.connect(self.append_item)
 
     def current_text(self) -> str:

@@ -50,7 +50,9 @@ class GroupBox(QtWidgets.QGroupBox):
           :meth:`on_toggle`.
     """
 
-    def __init__(self, label: str = '', collapsible: bool = False,
+    def __init__(self,
+                 label: str = '',
+                 collapsible: bool = False,
                  horizontal: bool = False) -> None:
         super().__init__(label)
         if horizontal:

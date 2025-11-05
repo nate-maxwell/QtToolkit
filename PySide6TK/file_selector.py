@@ -39,7 +39,7 @@ class FileSelector(QtWidgets.QWidget):
             browser dialog.
 
     Args:
-        name (str): The label text to display before the line edit.
+        text (str): The label text to display before the line edit.
 
     Notes:
         - The “Open” button launches a standard ``QFileDialog``.
@@ -49,10 +49,10 @@ class FileSelector(QtWidgets.QWidget):
           a ``pathlib.Path`` via the :attr:`path` property.
     """
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, text: str) -> None:
         """Label text before line edit."""
         super().__init__()
-        self.name = name
+        self.name = text
         self._create_widgets()
         self._create_layout()
         self._create_connections()
