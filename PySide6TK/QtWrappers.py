@@ -39,6 +39,15 @@ from PySide6TK.icons import BUTTON_ORANGE_40X40
 from PySide6TK.icons import BUTTON_PURPLE_40X40
 from PySide6TK.icons import BUTTON_RED_40X40
 from PySide6TK.icons import BUTTON_YELLOW_40X40
+from PySide6TK.icons import ICON_AFTER_EFFECTS_400X400
+from PySide6TK.icons import ICON_BLENDER_400X400
+from PySide6TK.icons import ICON_IMG_NOT_FOUND_400X400
+from PySide6TK.icons import ICON_MAYA_400X400
+from PySide6TK.icons import ICON_NO_PREVIEW_384X384
+from PySide6TK.icons import ICON_NUKE_400X400
+from PySide6TK.icons import ICON_PHOTOSHOP_400X400
+from PySide6TK.icons import ICON_SUBSTANCE_PAINTER_400X400
+from PySide6TK.icons import ICON_UNREAL_400X400
 from PySide6TK.icons import ICONS_PATH
 from PySide6TK.image_sequence import ImageSequence
 from PySide6TK.labeled_combobox import LabeledComboBox
